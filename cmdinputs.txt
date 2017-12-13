@@ -1,0 +1,63 @@
+C:\virtual>python -m venv vir1
+
+C:\virtual> vir1\Scripts\activate
+(vir1) C:\virtual>pip install --upgrade pip
+Requirement already up-to-date: pip in c:\virtual\vir1\lib\site-packages
+
+(vir1) C:\virtual>pip install django~=1.11.0
+Collecting django~=1.11.0
+  Downloading Django-1.11.8-py2.py3-none-any.whl (6.9MB)
+    100% |¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦| 7.0MB 181kB/s
+Collecting pytz (from django~=1.11.0)
+  Downloading pytz-2017.3-py2.py3-none-any.whl (511kB)
+    100% |¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦| 512kB 1.3MB/s
+Installing collected packages: pytz, django
+Successfully installed django-1.11.8 pytz-2017.3
+
+(vir1) C:\virtual> django-admin.exe startproject mysite .
+
+(vir1) C:\virtual>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+
+(vir1) C:\virtual>python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 11, 2017 - 16:55:21
+Django version 1.11.8, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[11/Dec/2017 16:56:23] "GET / HTTP/1.1" 200 1716
+Not Found: /favicon.ico
+[11/Dec/2017 16:56:23] "GET /favicon.ico HTTP/1.1" 404 1962
+^C
+(vir1) C:\virtual>python manage.py startapp website
+
+(vir1) C:\virtual>python manage.py makemigrations website
+Migrations for 'website':
+  website\migrations\0001_initial.py
+    - Create model Post
+
+(vir1) C:\virtual>python manage.py migrate website
+Operations to perform:
+  Apply all migrations: website
+Running migrations:
+  Applying website.0001_initial... OK
+
+(vir1) C:\virtual>deactivate
+C:\virtual>
