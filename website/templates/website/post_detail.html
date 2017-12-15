@@ -12,7 +12,7 @@
         <p>{{ post.text|linebreaksbr }}</p>
         <a href="/website/base/">back to goals</a>
         <p>
-          <a href='/website/base/delete_new/{{post.pk}}/'>
+          <a href="{% url 'post_delete' pk=post.pk %}">
           delete to do
         </a>
         </p>
