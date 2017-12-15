@@ -5,12 +5,6 @@ from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
 
-def index(request): #for adding other page
-    return render(request, 'website/index.html', {})
-
-def base(request): #for adding other page
-    return render(request, 'website/base.html', {})
-
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'website/post_list.html', {'posts': posts})
@@ -26,7 +20,6 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
-            post.title = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
