@@ -26,9 +26,10 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
-            post.title = timezone.now()
+            post.title = 'notcomplete'
+            #post.number = 0
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('/base/')
     else:
         form = PostForm()
     return render(request, 'website/post_edit.html', {'form': form})
@@ -41,8 +42,15 @@ def post_edit(request, pk):
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
+            #post.number = 0
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('/base/')
     else:
         form = PostForm(instance=post)
     return render(request, 'website/post_edit.html', {'form': form})
+
+
+
+
+def delete_new(request,id):
+    u = New.post.get(pk=id).delete()

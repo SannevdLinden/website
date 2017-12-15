@@ -15,8 +15,8 @@ for (i = 0; i < myNodelist.length; i++) {
   let span = document.createElement("button");
   let txt = document.createTextNode("\u00D7");
   span.className = "close";
-  span.appendChild(txt);    
-  myNodelist[i].appendChild(span);     
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
 }
 
 // Create a "close" button and append it to each list item completed
@@ -32,18 +32,20 @@ for (q = 0; q < myNodelistcomplete.length; q++) {
 for (j = 0; j < close.length; j++) {
   close[j].onclick = function() {
     let div = this.parentElement;
-    div.style.display = "none";    
+    div.style.display = "none";
   }
 }
 
 // Add a "checked" symbol when clicking on a list item
-list.addEventListener('click', function(ev) {    
+list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');    
-    //if checked move to other list   
+    ev.target.classList.toggle('checked');
+
+
+    //if checked move to other list
     if(ev.target.classList == "checked"){
-         completedtasks.appendChild(ev.target);
-     }  
+         completedtasks.appendChild(ev.target);       
+     }
   }
 }, false);
 
@@ -51,19 +53,19 @@ list.addEventListener('click', function(ev) {
 // Add a "checked" symbol when clicking on a list item
 completedtasks.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');    
+    ev.target.classList.toggle('checked');
     //if not checked move back
     if(ev.target.classList == ""){
        list.appendChild(ev.target);
-    } 
+    }
   }
 }, false);
 
 
 function longestwordinstring(str){ //find the longest word in the input
     let split = str.split(' ');
-    let p;   
-    
+    let p;
+
     for(p = 0; p < split.length; p++){
         if(split[p].length > longestword){
 	       longestword = split[p].length;
@@ -81,9 +83,9 @@ function newElement() {
   let txt = document.createTextNode("\u00D7");
   let k;
   let div;
-  
+
   longestwordinstring(inputValue); //search for the longest word
-      
+
   li.appendChild(t);
   if (inputValue === '') {
     alert("Please write something!");
@@ -94,7 +96,7 @@ function newElement() {
     document.getElementById("myUL").appendChild(li);
   }
   document.getElementById("input").value = "";
-  
+
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);

@@ -1,16 +1,20 @@
 {% extends 'website/base.html' %}
 
-{% block content %}
+{% block moetweg %}
     <div class="post">
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }}
             </div>
         {% endif %}
-        {% if user.is_authenticated %}
-          <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-        {% endif %}
-        <h1>{{ post.title }}</h1>
+
+        <h1>you just added this post</h1>
         <p>{{ post.text|linebreaksbr }}</p>
+        <a href="/website/base/">back to goals</a>
+        <p>
+          <a href='/website/base/delete_new/{{post.pk}}/'>
+          delete to do
+        </a>
+        </p>
     </div>
 {% endblock %}

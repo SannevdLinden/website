@@ -63,20 +63,18 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="todobox">
           <h1 class="page-header">Goals</h1>
-          <div id="addtodo"> <!--add to do -->
-              <input type="text" id="input" placeholder="Title...">
-              <span onclick="newElement()" class="addbutton">Add</span>
-          </div>
-          <ul id="myUL"> <!--to do's in a list -->
+          {% block new %}
+           {% endblock %}
+           
+           {% block moetweg %}
+            {% endblock %}
+
+
             {% block content %}
              {% endblock %}
               <!--<li>Get Blood Pressure constant</li>
               <li>Get constant speed around 110 bmp</li>-->
-          </ul> <br><br>
-          <h3>Completed</h3> <!--completed to do's -->
-          <ul id="myULcomplete">
-              <li class="checked">Get depth to 2 mm</li>
-          </ul> <br><br>
+
         </div>
       </div>
     </div>
