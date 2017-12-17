@@ -1,0 +1,90 @@
+{% load staticfiles %}
+
+      <!--#{% if user.is_authenticated %}
+      #  <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+      #{% endif %}
+
+          -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'img/logo.png' %}">
+
+    <title>System for Improving Resuscitation</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> <!-- bootstrap basic css -->
+    <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet"> <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'css/goals.css' %}" rel="stylesheet">
+    <script src="{% static 'js/ie-emulation-modes-warning.js' %}"></script> <!--bootstrap default for a bug in ie -->
+
+  </head>
+
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header"> <!--toggle navigation for small screen sizes-->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">S.I.R.</a> <!--Branding in the top right corner, link back to the dashboard-->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right"> <!--nav bar with basic options, the link do not work for this assignment since there are no real account yet-->
+            <li><a href="#" onClick="alert('Setting, Profile, Help and Search are not working for this assignment')">Settings</a></li>
+            <li><a href="#" onClick="alert('Setting, Profile, Help and Search are not working for this assignment')">Profile</a></li>
+            <li><a href="#" onClick="alert('Setting, Profile, Help and Search are not working for this assignment')">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right"> <!--Search bar-->
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar"> <!--Side bar navigation-->
+            <li><a href="\">Dashboard</a></li>
+            <li><a href="sessions.html">Session Calander </a></li>
+            <li><a href="progress.html">Your Progress</a></li>
+            <li class="active"><a href="/website/base/">Goals <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="todobox">
+          <h1 class="page-header">Goals</h1>
+          {% block new %}
+           {% endblock %}
+           
+           {% block moetweg %}
+            {% endblock %}
+
+
+            {% block content %}
+             {% endblock %}
+              <!--<li>Get Blood Pressure constant</li>
+              <li>Get constant speed around 110 bmp</li>-->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- all the used js files -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script>window.jQuery || document.write('<script src="{% static 'js/jquery.min.js' %}"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/goals.js' %}"></script>
+    <script src="{% static 'js/holder.min.js' %}"></script> <!-- Just to make the placeholder images work -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+</html>

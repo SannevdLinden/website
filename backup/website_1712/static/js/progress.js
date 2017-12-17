@@ -1,7 +1,7 @@
-let flowdata = [75,95,130,102,100]; //data for the 4 graph lines
-let bloodpressuredata = [40,65,80,62,60];
-let depthdata = [10,3,5,1,2];
-let speeddata = [150,120,80,60,100];
+let flowdata = []; //data for the 4 graph lines
+let bloodpressuredata = [];
+let depthdata = [];
+let speeddata = [];
 let emptyarray = []; //empty array when the data is not displayed
 let ctx; //the canvas element
 let bloodpressure = false; //booleans is the grpah lines are displayed or not
@@ -18,7 +18,7 @@ let xhttp3 = new XMLHttpRequest();
 let xhttp4 = new XMLHttpRequest();
 var databp;
 
-/*xhttp.onreadystatechange = function() { //gets the data from the txt file
+xhttp.onreadystatechange = function() { //gets the data from the txt file
     if (this.readyState == 4 && this.status == 200) {
       datastr1 = this.responseText;
     }
@@ -51,7 +51,7 @@ xhttp4.open("GET", "sdata.txt", true);
 xhttp4.send();
 
 
-setTimeout(function(){ //data needs a moment to load, therefore wait a bit.
+setTimeout(function(){ //data needs a moment to load, therefore wait a bit.  
 
     bloodpressuredata = datastr1.split(","); //the data is loaded in the form of a string need to be splitted
     flowdata = datastr2.split(",");
@@ -59,7 +59,6 @@ setTimeout(function(){ //data needs a moment to load, therefore wait a bit.
     speeddata = datastr4.split(",");
 
 }, 100);
-*/
 
 let config = { //configuration for the graph
     type: 'line',
@@ -99,7 +98,7 @@ let config = { //configuration for the graph
             mode: 'index',
             intersect: false,
         },
-        hover: {
+        hover: { 
             mode: 'nearest',
             intersect: true
         },
@@ -109,7 +108,7 @@ let config = { //configuration for the graph
                 scaleLabel: {
                     display: true,
                     labelString: 'Session Number'
-                }
+                }                        
             }],
             yAxes: [{
                 display: true,
@@ -125,7 +124,7 @@ let config = { //configuration for the graph
         }
     }
 };
-
+        
 $(window).load(function() {
     ctx = document.getElementById("canvas").getContext("2d"); //draw the graph
     window.myLine = new Chart(ctx, config);
@@ -143,7 +142,7 @@ $('#bpline').click(function() {
       bloodpressure = true;
   } else{
       console.log("something went wrong");
-  }
+  }          
   window.myLine.update(); //load the changes in graph
 });
 
@@ -159,8 +158,8 @@ $('#frline').click(function() { //show/hide flow rate data
       flowrate = true;
   } else{
       console.log("something went wrong");
-  }
-  window.myLine.update();
+  }          
+  window.myLine.update(); 
 });
 
 $('#dline').click(function() { //show/hide depth data
@@ -174,8 +173,8 @@ $('#dline').click(function() { //show/hide depth data
       depth = true;
   } else{
       console.log("something went wrong");
-  }
-  window.myLine.update();
+  }          
+  window.myLine.update(); 
 });
 
 $('#sline').click(function() { //show/hide speed data
@@ -189,6 +188,6 @@ $('#sline').click(function() { //show/hide speed data
       speed = true;
   } else{
       console.log("something went wrong");
-  }
-  window.myLine.update();
+  }          
+  window.myLine.update(); 
 });

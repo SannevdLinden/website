@@ -11,12 +11,6 @@ def index(request): #for adding other page
 def base(request): #for adding other page
     return render(request, 'website/base.html', {})
 
-def sessions(request): #for adding other page
-    return render(request, 'website/sessions.html', {})
-
-def progress(request): #for adding other page
-    return render(request, 'website/progress.html', {})
-
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'website/post_list.html', {'posts': posts})
