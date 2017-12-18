@@ -1,0 +1,20 @@
+{% extends 'website/base.html' %}
+
+{% block moetweg %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+
+        <h1>you just added this post</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+        <a href="/website/base/">back to goals</a>
+        <p>
+          <a href="{% url 'post_delete' pk=post.pk %}">
+          delete to do
+        </a>
+        </p>
+    </div>
+{% endblock %}
