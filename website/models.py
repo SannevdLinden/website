@@ -19,7 +19,7 @@ class Post(models.Model): #name is Post and can be changed
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(
-            blank=True, null=True)
+            default=timezone.now)
     linenos = models.BooleanField(default=False)
     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
     style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
