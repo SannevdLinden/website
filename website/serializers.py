@@ -1,22 +1,15 @@
 from rest_framework import serializers
-#from website.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 from website.models import Post, LANGUAGE_CHOICES, STYLE_CHOICES
 from django.contrib.auth.models import User #step4
 
 
-class SnippetSerializer(serializers.HyperlinkedModelSerializer): #step5
-    #owner = serializers.ReadOnlyField(source='owner.username')
+class SnippetSerializer(serializers.HyperlinkedModelSerializer): #for the API to identify which information of the model Post is used
     author = serializers.ReadOnlyField(source='owner.username')
-    #highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
-    highlight = serializers.HyperlinkedIdentityField(view_name='post-highlight', format='html')
+    highlighted = serializers.HyperlinkedIdentityField(view_name='post-highlighted', format='html')
 
     class Meta:
         model=Post
-        #model = Snippet
-        #fields = ('url', 'id', 'highlight', 'owner',
-        #          'title', 'code', 'linenos', 'language', 'style')
-
-        fields = ('url', 'id', 'highlight', 'author',
+        fields = ('url', 'id', 'highlighted', 'author',
                   'title', 'text', 'linenos', 'language', 'style')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,6 +1,6 @@
 {% extends 'website/base.html' %}
 
-{% block moetweg %}
+{% block detail %} <!--details of a to do -->
     <div class="post">
         {% if post.published_date %}
             <div class="date">
@@ -8,13 +8,14 @@
             </div>
         {% endif %}
 
-        <h1>you just added this post</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
-        <a href="/website/base/">back to goals</a>
+        <h1>{{ post.text|linebreaksbr }}</h1>
+        <br><br>
         <p>
-          <a href="{% url 'post_delete' pk=post.pk %}">
-          delete to do
-        </a>
+          <a href="/website/base/" class="buttons">back to goals</a>
+        </p><br><br><br>
+        <p>
+          <a href="{% url 'post_delete' pk=post.pk %}" class="buttons" style="padding: 10px 25px 10px 25px;"> <!-- delete to do-->
+          delete to do </a>
         </p>
     </div>
 {% endblock %}

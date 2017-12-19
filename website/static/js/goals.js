@@ -44,7 +44,7 @@ list.addEventListener('click', function(ev) {
 
     //if checked move to other list
     if(ev.target.classList == "checked"){
-         completedtasks.appendChild(ev.target);       
+         completedtasks.appendChild(ev.target);
      }
   }
 }, false);
