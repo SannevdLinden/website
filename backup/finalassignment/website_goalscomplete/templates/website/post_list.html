@@ -1,0 +1,30 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+    <div id="addtodo"> <!--add to do -->
+
+        {% if user.is_authenticated %} <!-- add button-->
+          <a href="{% url 'post_new' %}" class="top-menu"><span onclick="newElement()" class="addbutton">Add</span></a>
+        {% endif %}
+    </div>
+
+    <ul id="myUL"> <!--to do's in a list -->
+      {% for post in posts %}
+          {% if post.title == 'notcomplete' %} <!-- add button-->
+            <li><a href="{% url 'post_detail' pk=post.pk %}" id="todotext"> {{ post.text }} </a></li>
+          {% endif %}
+      {% endfor %}
+    </ul> <br><br>
+
+    <!--NEWNEW -->
+    <h1 class="page-header">Completed</h1> <!-- completed to do's -->
+    <ul id="myULcomplete"> <!--to do's in a list -->
+      {% for post in posts %}
+          {% if post.title == 'complete' %} <!-- add button-->
+            <li class="checked"><a href="{% url 'post_detail' pk=post.pk %}" id="todotext"> {{ post.text }} </a></li>
+          {% endif %}
+      {% endfor %}
+    </ul> <br><br>
+
+{% endblock %}

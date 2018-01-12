@@ -1,0 +1,10 @@
+{% extends 'website/base2.html' %}
+
+{% block content %}
+<a class="btn btn-default" href="{% url 'home'%}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <h1>New comment</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Send</button>
+    </form>
+{% endblock %}

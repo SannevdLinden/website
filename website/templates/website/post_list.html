@@ -4,18 +4,27 @@
 
     <div id="addtodo"> <!--add to do -->
 
-        {% if user.is_authenticated %} <!-- add button-->
-          <a href="{% url 'post_new' %}" class="top-menu"><span onclick="newElement()" class="addbutton">Add</span></a>
-        {% endif %}
+
+      <a href="{% url 'post_new' %}" class="top-menu"><span onclick="newElement()" class="addbutton">Add</span></a>
+
     </div>
 
     <ul id="myUL"> <!--to do's in a list -->
       {% for post in posts %}
-          <li><a href="{% url 'post_detail' pk=post.pk %}" id="todotext"> {{ post.text }} </a></li>
+          {% if post.title == 'notcomplete' %} <!-- add button-->
+            <li><a href="{% url 'post_detail' pk=post.pk %}" id="todotext"> {{ post.text }} </a></li>
+          {% endif %}
       {% endfor %}
     </ul> <br><br>
-<!--<h3>Completed</h3> completed to do's -->
-<!--<ul id="myULcomplete">
-    <li class="checked">Get depth to 2 mm</li>
-</ul> <br><br>-->
+
+    <!--NEWNEW -->
+    <h1 class="page-header">Completed</h1> <!-- completed to do's -->
+    <ul id="myULcomplete"> <!--to do's in a list -->
+      {% for post in posts %}
+          {% if post.title == 'complete' %} <!-- add button-->
+            <li class="checked"><a href="{% url 'post_detail' pk=post.pk %}" id="todotext"> {{ post.text }} </a></li>
+          {% endif %}
+      {% endfor %}
+    </ul> <br><br>
+    <p id="colordata" style="visibility: hidden;">{{ color.title }}</p>
 {% endblock %}

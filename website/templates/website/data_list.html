@@ -1,0 +1,25 @@
+{% extends 'website/progress.html' %}
+
+{% block depth %}
+    <div class="col-xs-6 col-sm-3 placeholder">
+      {% for depthdata in ddata %}
+          <p class="data" style="visibility: hidden;">{{ depthdata.text }}</p>
+      {% endfor %}
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      {% for data in bpdata %}
+          <p class="bdata" style="visibility: hidden;">{{ data.text }}</p>
+      {% endfor %}
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      {% for data in frdata %}
+          <p class="fdata" style="visibility: hidden;">{{ data.text }}</p>
+      {% endfor %}
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      {% for data in sdata %}
+          <p class="sdata" style="visibility: hidden;">{{ data.text }}</p>
+      {% endfor %}
+    </div>
+    <p id="colordata" style="visibility: hidden;">{{ color.title }}</p>
+{% endblock %}

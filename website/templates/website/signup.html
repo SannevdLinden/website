@@ -1,0 +1,27 @@
+<!--Added this file by Lars-->
+
+{% extends 'website/second_base.html' %}
+
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      {% for field in form %}
+        <p>
+          <div class="col-3">{{ field.label_tag }}</div>
+          <br>
+          <div class="col-9">{{ field }}</div>
+          <br>
+          {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+    </div>
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}

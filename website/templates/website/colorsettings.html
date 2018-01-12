@@ -1,0 +1,18 @@
+{% extends 'website/settings.html' %}
+
+{% block setting %}
+    <h4>Color Theme:</h4><br>
+    <label class="switch" onclick="location.href='{% url 'color_grey' pk=color.pk %}'">
+    <input type="checkbox" checked id="colors">
+    <span class="slider round"></span>
+    </label>
+    <br><br>
+    <h4>Grey Theme:</h4><br>
+    <label class="switch" onclick="location.href='{% url 'color_grey' pk=color.pk %}'">
+    <input type="checkbox"  id="grey">
+    <span class="slider round"></span>
+    </label>
+    <p id="colordata" style="visibility: hidden;">{{ color.title }}</p>
+
+
+{% endblock %}

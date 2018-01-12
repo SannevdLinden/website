@@ -1,0 +1,21 @@
+{% extends 'website/base.html' %}
+
+{% block detail %} <!--details of a to do -->
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+
+        <h1>{{ post.text|linebreaksbr }}</h1>
+        <br><br>
+        <p>
+          <a href="/website/base/" class="buttons">back to goals</a>
+        </p><br><br><br>
+        <p>
+          <a href="{% url 'post_delete' pk=post.pk %}" class="buttons" style="padding: 10px 25px 10px 25px;"> <!-- delete to do-->
+          delete to do </a>
+        </p>
+    </div>
+{% endblock %}

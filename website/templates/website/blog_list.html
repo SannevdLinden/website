@@ -1,0 +1,82 @@
+{% extends 'website/base2.html' %}
+
+{% block content %}
+  <h1 class="page-header">Blog</h1>
+  <div class = "box">
+    <h1>Recent Posts</h2>
+    <a class="btn btn-default flag" href="{% url 'blog_new' %}"> <span class="glyphicon glyphicon-plus"></span></a>
+</div>
+
+{% for blog in blogs %}
+
+<div class = "box">
+  <a href="{% url 'blog_detail' pk=blog.pk %}" id = "nostyling">
+<div class = "commentreplies" id = "shadow">
+
+        <span class = "listtitle">{{ blog.Title }}</span>
+        <span class = "listauthor"> {{ blog.author}}</span>
+                  <div class="listdate">{{ blog.published_date }}</div>
+
+                  <p class = "listtext">  {{ blog.Text|truncatechars:200 }}</p>
+                  <p>Comments: {{ blog.comments.count }}</p>
+                  <p class = "flags">{{ blog.flags }}</p>
+
+
+</div>
+</a>
+<a class="btn btn-default flag" href="{% url 'blog_flaglist' pk=blog.pk %}"><span class="glyphicon glyphicon-star-empty"></span></a>
+{% for flag in flaggeds %}
+{% if blog.pk == flag.blog.pk and flag.username == request.user%}
+  <a class="btn btn-default flag" href="{% url 'blog_flaglist_remove' pk=blog.pk %}"><span class="glyphicon glyphicon-star"></span></a>
+
+{% endif %}
+
+{% endfor %}
+
+
+
+
+
+
+
+</div>
+
+
+    {% endfor %}
+
+    <div class = "box">
+      <h1>Flagged Posts</h2>
+
+  </div>
+
+{% for flag in flaggeds %}
+{% for blog in blogs %}
+{% if blog.pk == flag.blog.pk %}
+{% if flag.username == request.user %}
+
+<div class = "box">
+  <a href="{% url 'blog_detail' pk=blog.pk %}" id = "nostyling">
+<div class = "commentreplies" id = "shadow">
+
+        <span class = "listtitle">{{ blog.Title }}</span>
+        <span class = "listauthor"> {{ blog.author}}</span>
+                  <div class="listdate">{{ blog.published_date }}</div>
+
+                  <p class = "listtext">  {{ blog.Text|truncatechars:200 }}</p>
+                  <p>Comments: {{ blog.comments.count }}</p>
+                  <p class = "flags">{{ blog.flags }}</p>
+
+
+</div>
+</a>
+  <a class="btn btn-default flag" href="{% url 'blog_flaglist_remove' pk=blog.pk %}"><span class="glyphicon glyphicon-star"></span></a>
+
+</div>
+{% endif %}
+{% endif %}
+
+  {% endfor %}
+    {% endfor %}
+
+  <!-- Upload form. Note enctype attribute! -->
+{% endblock %}

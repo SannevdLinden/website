@@ -1,0 +1,54 @@
+{% extends 'website/base2.html' %}
+
+{% block content %}
+<a class="btn btn-default" href="{% url 'home'%}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+{% if blog.author == request.user %}
+<a class="btn btn-default" href="{% url 'blog_edit' pk=blog.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+<a class="btn btn-default" href="{% url 'blog_remove' pk=blog.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+{% endif %}
+        {% if blog.Title %}
+            <div class ="box">
+                <h1 class = "page-header">{{ blog.Title }} <small>{{blog.author}}</small> </h1>
+
+
+                <a class="btn btn-default flag" href="{% url 'blog_flagdetail' pk=blog.pk %}"><span class="glyphicon glyphicon-star-empty"></span></a>
+                {% for flag in flaggeds %}
+                {% if blog.pk == flag.blog.pk and flag.username == request.user%}
+                  <a class="btn btn-default flag" href="{% url 'blog_flagdetail_remove' pk=blog.pk %}"><span class="glyphicon glyphicon-star"></span></a>
+
+                {% endif %}
+
+                {% endfor %}
+
+                {{blog.Text}}
+
+            </div>
+        {% endif %}
+
+        <hr>
+        <a class="btn btn-default" href="{% url 'add_comment_to_blog' pk=blog.pk %}">Add comment</a>
+        {% for comment in blog.comments.all %}
+        <div class = "box">
+          <a href="{% url 'add_comment_to_comment' pk=comment.pk  %}" id = "nostyling">
+          <div class = "commentreplies" id = "shadow">
+            <div id = "widthid">
+                {% if comment.target %}
+                <span class = "listauthor"> @{{comment.target}}</span>
+                {% endif %}
+              </div>
+                <span class = "listauthor"> by:  {{ comment.author}}</span>
+                <div class="listdate">{{ comment.created_date }}</div>
+                <p class = "listtext">  {{ comment.text|linebreaks }}</p>
+
+
+        </div>
+        </a>
+        {% if comment.author == request.user %}
+          <a class="btn btn-default flag" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+          {% endif %}
+        </div>
+
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+{% endblock %}

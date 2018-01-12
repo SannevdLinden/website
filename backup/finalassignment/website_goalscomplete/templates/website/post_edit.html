@@ -1,0 +1,8 @@
+{% extends 'website/base.html' %}
+
+{% block new %}
+     <form method="POST" class="post-form">{% csrf_token %} <!-- make a new to do and save it-->
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default" id="safebutton">Save</button>
+    </form>
+{% endblock %}

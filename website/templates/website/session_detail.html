@@ -1,0 +1,125 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'img/logo.png' %}">
+
+    <title>System for Improving Resuscitation</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> <!-- bootstrap basic css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet"> <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'css/events_list.css' %}" rel="stylesheet">
+    <script src="{% static 'js/ie-emulation-modes-warning.js' %}"></script> <!--bootstrap default for a bug in ie -->
+<!-- From here added by Lars------------------------------------------------------------------>
+
+<!-- Till here added by Lars------------------------------------------------------------------>
+  </head>
+
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header"> <!--toggle navigation for small screen sizes-->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="\">S.I.R.</a> <!--Branding in the top right corner, link back to the dashboard-->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right"> <!--nav bar with basic options, the link do not work for this assignment since there are no real account yet-->
+            <!-- From here added by Lars------------------------------------------------------------------>
+            {% if not user.is_authenticated %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li><a href="/website/profile/"><img class= "navicons" src="{% static 'img/profile.png' %}"></a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% endif %}
+            <!-- Till here added by Lars------------------------------------------------------------------>
+            <li><a href="\"><img class= "navicons" src="{% static 'img/dashboard.png' %}"></a></li>
+            <li><a href="/website/sessions/"><img class= "navicons" src="{% static 'img/calander.png' %}"></a></li>
+            <li><a href="/website/progress/"><img class= "navicons" src="{% static 'img/progress.png' %}"></a></li>
+            <li><a href="/website/base/"><img class= "navicons" src="{% static 'img/todo.png' %}"></a></li>
+            <li><a href="{% url 'home'%}"><img class= "navicons" src="{% static 'img/blog.png' %}"></a></li>
+            <li><a href="/website/settings/"><img class= "navicons" src="{% static 'img/settings.png' %}"></a></li>
+            <li><a href="/website/help/"><img class= "navicons" src="{% static 'img/help.png' %}"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="\">Dashboard</a></li>
+            <li class="active"><a href="/website/sessions/">Session Calender <span class="sr-only">(current)</span></a></li>
+            <li><a href="/website/progress/">Your Progress</a></li>
+            <li><a href="/website/base/">Goals</a></li>
+            <li><a href="{% url 'home'%}">Blog</a></li> <!--Sebastiaan -->
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <!-- From here added by Lars------------------------------------------------------------------>
+          {% if user.is_authenticated %}
+          <!-- Till here added by Lars------------------------------------------------------------------>
+
+          <h1 class="page-header">Sessions</h1>
+            <h3>Session Number {{ event.number }}</h3>
+            {% if event.author == request.user %}
+              <div class="session_actions">
+                <a href="/website/sessions/" class="buttons" style="color:black"><i class="fa fa-caret-square-o-left"></i> Back to Sessions</a>&nbsp;
+                <a href="{% url 'session_edit' pk=event.pk %}" class="buttons" style="color:black"><i class="fa fa-pencil-square-o"></i> Edit Session</a>&nbsp;
+                <a href="{% url 'session_delete' pk=event.pk %}" class="buttons" style="color:black"><i class="fa fa-trash-o"></i> <!-- delete to do-->
+                Delete Session </a>
+              </div>
+            {% endif %}
+            <br>
+            <p><b>Date:</b><br></p>
+            <p>{{ event.day }}</p>
+            <p><b>Starting Time:</b><br></p>
+            <p>{{ event.start_time }}</p>
+            <p><b>Ending Time:</b><br></p>
+            <p>{{ event.end_time }}</p>
+            <p><b>Location:</b><br></p>
+            <p>{{ event.place }}</p>
+            <p><b>Instructor(s):</b><br></p>
+            <p>{{ event.instructor }}</p>
+            <p><b>Notes:</b><br></p>
+            <p>{{ event.notes|linebreaksbr }}</p>
+
+
+            <!-- From here added by Lars------------------------------------------------------------------>
+            {% else %}
+            <p class="please_login" style = "font-size:30px;">Sorry! You cannot visit the site when you are not logged in.</p>
+            <p class="please_login"><a href="{% url 'login' %}">Please, login</a></p>
+
+            {% endif %}
+            <!-- Till here added by Lars------------------------------------------------------------------>
+        </div>
+      </div>
+    </div>
+    <!-- all the used js files -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script>window.jQuery || document.write('<script src="{% static 'js/jquery.min.js' %}"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/holder.min.js' %}"></script> <!-- Just to make the placeholder images work -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+</html>
